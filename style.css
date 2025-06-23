@@ -1,3 +1,21 @@
+/* Remove tap highlight (Android/iOS) */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-focus-ring-color: transparent;
+}
+
+/* Prevent focus outline on mobile only */
+@media (hover: none) and (pointer: coarse) {
+  button:focus,
+  a:focus,
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
 /* Loading Screen */
 .loading-screen {
     position: fixed;
