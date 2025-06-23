@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Alice AI - Your Personal AI Assistant</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="A powerful AI assistant that helps you with conversations, questions, and tasks. Access your AI companion anywhere, anytime.">
+    <meta name="keywords" content="AI, assistant, chat, artificial intelligence, productivity, help">
+    <meta name="author" content="Alice AI">
+    <meta name="robots" content="index, follow">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- PWA Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/attached_assets/ai logo_1750664293637.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/attached_assets/ai logo_1750664293637.png">
+    
+    <!-- PWA Theme Colors -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="msapplication-TileColor" content="#6366f1">
+    <meta name="msapplication-navbutton-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- PWA Display -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Alice AI">
+    <meta name="application-name" content="Alice AI">
+    
+    <!-- Prevent zoom on iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Stylesheets -->
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Google OAuth -->
+    <script src="https://accounts.google.com/gsi/client" async defer onload="window.googleScriptLoaded = true"></script>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-container">
+            <div class="loading-logo">
+                <img src="attached_assets/ai logo_1750664293637.png" alt="Alice AI Logo" class="loading-logo-img">
+                <div class="loading-glow"></div>
+            </div>
+            <div class="loading-text">
+                <h1>Alice AI</h1>
+                <p>Initializing your AI assistant...</p>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="loading-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+
+
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">
+                        <img src="attached_assets/ai logo_1750664293637.png" alt="Alice AI Logo" width="36" height="36">
+                    </span>
+                    <span class="logo-text">Alice</span>
+                </div>
+            </div>
+
+            <div class="sidebar-content">
+                <!-- Authentication Section -->
+                <div class="auth-section" id="authSection">
+                    <div class="auth-buttons" id="authButtons">
+                        <button class="auth-btn google-btn" id="googleSignIn">
+                            <i class="fab fa-google"></i>
+                            <span>Sign in with Google</span>
+                        </button>
+                    </div>
+                    
+                    <div class="user-profile" id="userProfile" style="display: none;">
+                        <div class="user-avatar">
+                            <img id="userAvatar" src="" alt="User Avatar">
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name" id="userName"></div>
+                            <div class="user-email" id="userEmail"></div>
+                        </div>
+                        <button class="auth-btn logout-btn" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sign Out</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="new-thread-btn">
+                    <span>New Thread</span>
+                    <kbd>⌘ K</kbd>
+                </button>
+
+                <nav class="nav-menu">
+                    <a href="#" class="nav-item active">
+                        <span class="nav-icon"><i class="fas fa-home"></i></span>
+                        Home
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon"><i class="fas fa-search"></i></span>
+                        Discover
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon"><i class="fas fa-book"></i></span>
+                        Library
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon"><i class="fas fa-cog"></i></span>
+                        Settings
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon"><i class="fas fa-question-circle"></i></span>
+                        Help
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Mobile Hamburger Menu -->
+        <div class="mobile-hamburger" id="mobileHamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay" id="mobileNavOverlay">
+            <div class="mobile-nav-header">
+                <div class="mobile-nav-title">
+                    <img src="attached_assets/ai logo_1750664293637.png" alt="Alice AI Logo" width="24" height="24">
+                    <span>Alice AI</span>
+                </div>
+                <button class="mobile-nav-close" id="mobileNavClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mobile-nav-content">
+                <button class="mobile-nav-home" id="mobileNavHome">
+                    <i class="fas fa-home"></i>
+                    <span>Go to Home</span>
+                </button>
+                
+                <button class="mobile-nav-new" id="mobileNavNew">
+                    <i class="fas fa-plus"></i>
+                    <span>New Conversation</span>
+                </button>
+                
+                <div class="mobile-nav-section">
+                    <h3>Recent Conversations</h3>
+                    <div class="mobile-conversation-list" id="mobileConversationList">
+                        <!-- Conversation items will be populated here -->
+                    </div>
+                </div>
+                
+                <button class="mobile-nav-clear" id="mobileNavClear">
+                    <i class="fas fa-trash"></i>
+                    <span>Clear All History</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="chat-header">
+                <h1>What can I help with?</h1>
+            </div>
+
+            <div class="suggestion-cards">
+                <div class="suggestion-card">
+                    <div class="card-icon"><i class="fas fa-music"></i></div>
+                    <div class="card-content">
+                        <div class="card-title">Upcoming Music Festivals</div>
+                    </div>
+                    <button class="card-add-btn">+</button>
+                </div>
+
+                <div class="suggestion-card">
+                    <div class="card-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="card-content">
+                        <div class="card-title">What is high yield savings account?</div>
+                    </div>
+                    <button class="card-add-btn">+</button>
+                </div>
+
+                <div class="suggestion-card">
+                    <div class="card-icon"><i class="fas fa-search"></i></div>
+                    <div class="card-content">
+                        <div class="card-title">What is AI?</div>
+                    </div>
+                    <button class="card-add-btn">+</button>
+                </div>
+
+                <div class="suggestion-card">
+                    <div class="card-icon"><i class="fas fa-running"></i></div>
+                    <div class="card-content">
+                        <div class="card-title">Best Running Shoes 2024</div>
+                    </div>
+                    <button class="card-add-btn">+</button>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages"></div>
+
+            <div class="chat-input-container">
+                <div class="input-wrapper">
+                    <input type="text" id="messageInput" placeholder="What do you want to know?" />
+                    <div class="input-actions">
+                        <button class="action-btn" title="Attach"><i class="fas fa-paperclip"></i></button>
+                        <button class="action-btn" title="Voice Message"><i class="fas fa-microphone"></i></button>
+                        <button class="action-btn" title="Browse Prompts"><i class="fas fa-globe"></i></button>
+                        <button class="send-btn" id="sendBtn"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                <div class="input-footer">
+                    <span class="character-count">0 / 3000</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="right-sidebar">
+            <div class="projects-header">
+                <h3>Conversation History</h3>
+                <button class="more-btn" id="clearHistoryBtn" title="Clear History">🗑️</button>
+            </div>
+
+            <button class="new-project-btn" id="newConversationBtn">New Conversation</button>
+
+            <div class="project-list" id="conversationList">
+                <!-- Conversation cards will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New content is available
+                                    if (confirm('New version available! Reload to update?')) {
+                                        newWorker.postMessage({ type: 'SKIP_WAITING' });
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+
+            // Listen for controlling changes
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                window.location.reload();
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        const installButton = document.createElement('button');
+        installButton.textContent = 'Install App';
+        installButton.className = 'install-prompt-btn';
+        installButton.style.display = 'none';
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+            
+            // Show install prompt in sidebar
+            const authSection = document.getElementById('authSection');
+            if (authSection && !document.querySelector('.install-prompt-btn')) {
+                authSection.appendChild(installButton);
+            }
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                deferredPrompt = null;
+                installButton.style.display = 'none';
+            }
+        });
+
+        // Track install
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            installButton.style.display = 'none';
+        });
+
+        // Handle PWA URL parameters
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('action') === 'new') {
+                // Start new conversation
+                const newConversationBtn = document.getElementById('newConversationBtn');
+                if (newConversationBtn) {
+                    newConversationBtn.click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

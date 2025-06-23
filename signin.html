@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sign In - Alice AI</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Sign in to Alice AI - Your Personal AI Assistant">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/attached_assets/ai logo_1750664293637.png">
+
+    <link href="signin.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- Google OAuth -->
+    <script src="https://accounts.google.com/gsi/client" async defer onload="console.log('Google GSI script loaded'); window.googleScriptLoaded = true;"></script>
+</head>
+<body>
+    <div class="signin-container">
+        <div class="signin-card">
+            <div class="signin-header">
+                <div class="logo">
+                    <img src="attached_assets/ai logo_1750664293637.png" alt="Alice AI Logo" class="logo-img">
+                    <div class="logo-glow"></div>
+                </div>
+                <h1>Welcome to Alice AI</h1>
+                <p>Sign in to start your AI-powered conversations</p>
+            </div>
+
+            <div class="signin-content">
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i class="fas fa-brain"></i>
+                        <span>Advanced AI Assistant</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-history"></i>
+                        <span>Conversation History</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Mobile Optimized</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure & Private</span>
+                    </div>
+                </div>
+
+                <div class="signin-form">
+                    <button class="google-signin-btn" id="googleSignIn">
+                        <i class="fab fa-google"></i>
+                        <span>Continue with Google</span>
+                    </button>
+
+                    <div class="signin-divider">
+                        <span>or</span>
+                    </div>
+
+                    <button class="guest-btn" id="continueAsGuest">
+                        <i class="fas fa-user"></i>
+                        <span>Continue as Guest</span>
+                    </button>
+                </div>
+
+                <div class="signin-footer">
+                    <p>By signing in, you agree to our Terms of Service and Privacy Policy</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="background-animation">
+            <div class="floating-particle"></div>
+            <div class="floating-particle"></div>
+            <div class="floating-particle"></div>
+            <div class="floating-particle"></div>
+            <div class="floating-particle"></div>
+        </div>
+    </div>
+
+    <script src="signin.js"></script>
+</body>
+</html>
