@@ -386,7 +386,7 @@ class AIChatBot {
                 signal: controller.signal,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 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'
+                    'Authorization': 'Bearer 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'
                 },
                 body: JSON.stringify({
                     model: 'llama-3.1-8b-instant',
